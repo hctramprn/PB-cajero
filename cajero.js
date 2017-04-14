@@ -31,6 +31,7 @@ function entregarDinero() {
         resultado.innerHTML += e.cantidad + " billetes de $" + e.valor + "<br>";
       }
     }
+    sobra();
   }
 
   console.log(entregado);
@@ -59,3 +60,15 @@ function teclaEnter(evento) {
     entregarDinero();
   }
 }
+
+function sobra() {
+  for (var entre of entregado) {
+    for (var din of caja) {
+      if (entre.valor == din.valor) {
+        var resta = din.cantidad - entre.cantidad;
+        console.log("Sobran " + resta + " billetes de $" + entre.valor);
+      }
+    }
+
+    }
+  }
