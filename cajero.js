@@ -6,6 +6,7 @@ class Billete {
 }
 
 function entregarDinero() {
+  entregado = [];
   var t = document.getElementById("dinero");
   dinero = parseInt(t.value);
   for (var bi of caja) {
@@ -26,25 +27,33 @@ function entregarDinero() {
     resultado.innerHTML = "No puedo entregar esa cantidad de dinero";
   }
   else {
+    resultado.innerHTML = "<strong>Se entregaron $" + t.value + " pesos en forma de:</strong><br>";
     for (var e of entregado) {
       if (e.cantidad > 0) {
-        resultado.innerHTML += e.cantidad + " billetes de $" + e.valor + "<br>";
+        if (e.cantidad == 1) {
+          resultado.innerHTML += e.cantidad + " billete de $" + e.valor + "<br>";
+        }
+        else {
+          resultado.innerHTML += e.cantidad + " billetes de $" + e.valor + "<br>";
+        }
       }
     }
     sobra();
+    saldo();
+    operacion.push("Operación #" + numOperacion + " por un monto de $" + t.value);
+    numOperacion = operacion.length + 1;
   }
 
-  console.log(entregado);
 }
 
+var dinero = 0;
 var caja = [];
 var entregado = [];
 
-caja.push( new Billete(50, 3) );
-caja.push( new Billete(20, 2) );
-caja.push( new Billete(10, 2) );
+caja.push( new Billete(50, 30) );
+caja.push( new Billete(20, 25) );
+caja.push( new Billete(10, 40) );
 
-var dinero = 1000;
 var div = 0;
 var papeles = 0;
 
@@ -66,9 +75,23 @@ function sobra() {
     for (var din of caja) {
       if (entre.valor == din.valor) {
         var resta = din.cantidad - entre.cantidad;
-        console.log("Sobran " + resta + " billetes de $" + entre.valor);
+        din.cantidad = resta;
       }
     }
+  }
+}
 
+function saldo() {
+  console.log("Operación #" + numOperacion + ". Billetes restantes:");
+  for (var billete of caja) {
+    if (billete.cantidad == 1) {
+      console.log(billete.cantidad + " billete de $" + billete.valor);
+    }
+    else {
+      console.log(billete.cantidad + " billetes de $" + billete.valor);
     }
   }
+}
+
+var operacion = [];
+var numOperacion = operacion.length + 1;
