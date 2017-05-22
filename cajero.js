@@ -38,7 +38,7 @@ function entregarDinero() {
   }
   else {
     //De lo contrario, recorre todo el array de entregado y lo escribe en el documento
-    resultado.innerHTML = "<strong>Se entregaron $" + t.value + " pesos en forma de:</strong><br>";
+    resultado.innerHTML = "<strong>Se entregaron $" + t.value + " dolares en forma de:</strong><br>";
     for (var e of entregado) {
       if (e.cantidad > 0) {
         if (e.cantidad == 1) {
